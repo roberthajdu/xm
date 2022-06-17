@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+  <ng-container *ngFor="let formField of formFields">
+    <p *ngIf="formField.type === 'text'">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ formField.label }}</mat-label>
+        <input matInput [formControlName]="formField.name">
+        <mat-error *ngIf="form.get(formField.name)?.invalid">{{getErrorMessage(form.get(formField.name)?.errors, formField.validations)}}</mat-error>
+      </mat-form-field>
+    </p>
+    <p *ngIf="formField.type === 'password'">
+        <app-password-input [formControlName]="formField.name" [customErrorMessage]="getErrorMessage(form.get(formField.name)?.errors, formField.validations)" [label]="formField.label"></app-password-input>
+    </p>
+  </ng-container>
+</form>
